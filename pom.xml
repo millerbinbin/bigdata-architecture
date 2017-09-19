@@ -10,23 +10,25 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <bigdata.deps.scope>compile</bigdata.deps.scope>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.5.0</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-core</artifactId>
             <version>1.0.3</version>
-            <exclusions>
-            <!--<exclusion>-->
-                <!--<groupId>org.slf4j</groupId>-->
-                <!--<artifactId>log4j-over-slf4j</artifactId>-->
-            <!--</exclusion>-->
-            </exclusions>
+            <scope>${bigdata.deps.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>0.11.0.1</version>
+            <scope>${bigdata.deps.scope}</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -50,6 +52,31 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <finalName>bigdata-storm</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>rel</id>
+            <properties>
+                <bigdata.deps.scope>provided</bigdata.deps.scope>
+            </properties>
+        </profile>
+    </profiles>
 </project>

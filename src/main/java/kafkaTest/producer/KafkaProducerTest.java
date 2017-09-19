@@ -1,9 +1,12 @@
 package kafkaTest.producer;
 
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import commons.Constants;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.PartitionInfo;
 import org.apache.storm.utils.Time;
 
 import java.util.Properties;
@@ -11,13 +14,12 @@ import java.util.Properties;
 public class KafkaProducerTest {
     private final Producer<String, String> producer;
     public final static String TOPIC = "TEST-TOPIC";
-    public final static String ADVERTISED_HOST = "192.168.99.101";
-    public final static String BOOTSTRAP_SERVERS = String.format("%s:32789, %s:32790", ADVERTISED_HOST, ADVERTISED_HOST);
+    public final static String BOOTSTRAP_SERVERS = Constants.BOOTSTRAP_SERVER();
 
     private KafkaProducerTest() {
         Properties props = new Properties();
         props.put("bootstrap.servers", BOOTSTRAP_SERVERS);
-        props.put("acks", "-1");
+        props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
         props.put("linger.ms", 1);
@@ -39,7 +41,7 @@ public class KafkaProducerTest {
             System.out.println(data);
             messageNo++;
             try {
-                Time.sleep(500);
+                Time.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

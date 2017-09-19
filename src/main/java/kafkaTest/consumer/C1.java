@@ -6,8 +6,10 @@ public class C1 {
         Thread t1 = new Thread(new KafkaConsumerTest("t-1", "jd-group1"));
         Thread t2 = new Thread(new KafkaConsumerTest("t-2","jd-group1"));
         Thread t3 = new Thread(new KafkaConsumerTest("t-3","jd-group2"));
+        Thread t4 = new Thread(new KafkaConsumerTest("t-4","jd-group2"));
         t1.start();
         t2.start();
         t3.start();
+        t4.start();
     }
 }

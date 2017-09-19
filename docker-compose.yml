@@ -2,57 +2,92 @@ version: '2'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: bigdata_zookeeper
     ports:
       - "49181:2181"
+    networks:
+      - bigdata-cluster
 
   kafka_1:
     image: wurstmeister/kafka
+    container_name: bigdata_kafka_1
     ports:
       - "32789:9092"
     links:
       - zookeeper
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.101
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
-  kafka_2:
-    image: wurstmeister/kafka
-    ports:
-      - "32790:9092"
-    links:
+    depends_on:
       - zookeeper
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 192.168.99.101
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_NUM_PARTITIONS: 4
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - bigdata-cluster
 
-#  nimbus:
-#    image: wurstmeister/storm-nimbus
-#    ports:
-#      - 49773:3773
-#      - 49772:3772
-#      - 49627:6627
-#      - 22
-#    links:
-#      - zookeeper:zk
-#
-#  supervisor:
-#    image: wurstmeister/storm-supervisor
-#    ports:
-#      - 8000
-#      - 22
-#    links:
-#      - nimbus:nimbus
-#      - zookeeper:zk
-#
-#  ui:
-#    image: wurstmeister/storm-ui
-#    ports:
-#      - 49080:8080
-#      - 22
-#    links:
-#      - nimbus:nimbus
-#      - zookeeper:zk
+  kafka_2:
+    image: wurstmeister/kafka
+    container_name: bigdata_kafka_2
+    ports:
+      - "32790:9092"
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.101
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_NUM_PARTITIONS: 4
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - bigdata-cluster
+
+  storm-ui:
+    image: baqend/storm
+    command: ui -c nimbus.seeds=\"[\\\""bigdata_storm_nimbus\\\""]\"
+    environment:
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+    container_name: bigdata_storm_ui
+    ports:
+      - "18000:8080"
+    links:
+      - storm-nimbus
+    depends_on:
+      - storm-nimbus
+    networks:
+      - bigdata-cluster
+
+  storm-nimbus:
+    image: baqend/storm
+    command: nimbus -c nimbus.seeds=\"[\\\""bigdata_storm_nimbus\\\""]\" -c storm.local.hostname="bigdata_storm_nimbus"
+    environment:
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+    container_name: bigdata_storm_nimbus
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    ports:
+      - "6627:6627"
+    networks:
+      - bigdata-cluster
+
+  storm-supervisor:
+    image: baqend/storm
+    command: supervisor -c nimbus.seeds=\"[\\\""bigdata_storm_nimbus\\\""]\" -c supervisor.slots.ports=[6700,6701,6702,6703]
+    environment:
+      - affinity:role!=supervisor
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+    container_name: bigdata_storm_supervisor
+    links:
+      - storm-nimbus
+    depends_on:
+      - storm-nimbus
+    networks:
+      - bigdata-cluster
+
+networks:
+  bigdata-cluster:
+    driver: bridge
