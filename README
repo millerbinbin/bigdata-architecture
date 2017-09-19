@@ -1,0 +1,7 @@
+docker run --name bigdata_mongo -v $PWD/db:/data/db -d mongo --auth
+docker exec -it bigdata_mongo mongo admin
+
+
+db.createUser({ user: 'mongo_user', pwd: 'mongo_user', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+
+docker run -it --rm --link bigdata_mongo:mongo mongo mongo -u mongo_user -p mongo_user --authenticationDatabase admin bigdata_mongo/test
