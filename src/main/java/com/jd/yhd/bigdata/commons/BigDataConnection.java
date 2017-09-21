@@ -6,6 +6,7 @@ import com.mongodb.ServerAddress;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.storm.kafka.BrokerHosts;
 import org.apache.storm.kafka.SpoutConfig;
 import org.apache.storm.kafka.StringScheme;
 import org.apache.storm.kafka.ZkHosts;
@@ -70,9 +71,9 @@ public class BigDataConnection {
     }
 
     public SpoutConfig getKafkaSpout(String topic) {
-        ZkHosts zkHost = new ZkHosts(ZOOKEEPER_SERVERS);
+        BrokerHosts brokerHosts = new ZkHosts(ZOOKEEPER_SERVERS);
         String spoutId = "kafka-storm-test-001";
-        SpoutConfig spoutConfig = new SpoutConfig(zkHost, topic, "/consumers/" + spoutId, spoutId);
+        SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, topic, "/consumers/" + spoutId, spoutId);
         spoutConfig.zkPort = Constants.ZOOKEEPER_PORTS;
         spoutConfig.zkServers = Arrays.asList(Constants.BIGDATA_HOST);
         spoutConfig.socketTimeoutMs = 60 * 1000;
