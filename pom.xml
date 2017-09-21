@@ -10,8 +10,8 @@
     <properties>
         <redis.client.version>2.9.0</redis.client.version>
         <mongodb.driver.version>3.5.0</mongodb.driver.version>
-        <storm.core.version>1.0.3</storm.core.version>
-        <kafka.client.version>0.11.0.1</kafka.client.version>
+        <storm.core.version>1.1.1</storm.core.version>
+        <kafka.version>0.11.0.1</kafka.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <bigdata.deps.scope>compile</bigdata.deps.scope>
@@ -34,9 +34,27 @@
             <scope>${bigdata.deps.scope}</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka</artifactId>
+            <version>${storm.core.version}</version>
+            <scope>${bigdata.deps.scope}</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>${kafka.client.version}</version>
+            <version>${kafka.version}</version>
+            <scope>${bigdata.deps.scope}</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.11</artifactId>
+            <version>${kafka.version}</version>
             <scope>${bigdata.deps.scope}</scope>
             <exclusions>
                 <exclusion>

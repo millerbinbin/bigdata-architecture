@@ -67,15 +67,13 @@ public class WordCounter extends BaseBasicBolt {
 		}else{
 			Integer c = counters.get(str) + 1;
 			counters.put(str, c);
-			if (c % 10 == 0){
-				System.out.println(str+": "+c);
-                Document filter = new Document().append("_id", str);
-                Document document = new Document().
-                        append("_id", str).
-                        append("count", c).
-                        append("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-                MongoUtil.upsertRecord(collection, filter, document);
-			}
-		}
+            System.out.println(str + ": " + c);
+            Document filter = new Document().append("_id", str);
+            Document document = new Document().
+                    append("_id", str).
+                    append("count", c).
+                    append("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            MongoUtil.upsertRecord(collection, filter, document);
+        }
 	}
 }

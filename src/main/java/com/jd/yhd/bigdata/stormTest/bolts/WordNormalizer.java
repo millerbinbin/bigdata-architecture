@@ -21,11 +21,12 @@ public class WordNormalizer extends BaseBasicBolt {
 	 */
 	public void execute(Tuple input, BasicOutputCollector collector) {
         String sentence = input.getString(0);
-        String[] words = sentence.split(" ");
-        for(String word : words){
+		String[] words = sentence.split(",");
+		for(String word : words){
             word = word.trim();
-            if(word!=""){
-                word = word.toLowerCase();
+			System.out.println(word);
+			if (word != "") {
+				word = word.toLowerCase();
                 collector.emit(new Values(word));
             }
         }
