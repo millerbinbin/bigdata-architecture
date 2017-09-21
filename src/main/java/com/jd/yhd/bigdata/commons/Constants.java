@@ -1,4 +1,4 @@
-package commons;
+package com.jd.yhd.bigdata.commons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +10,7 @@ public class Constants {
     public final static String MONGO_USERNAME = "mongo_user";
     public final static char[] MONGO_PASSWORD = "mongo_user".toCharArray();
     public final static String MONGO_DATABASE = "test";
+    public final static int REDIS_PORT = 6379;
     public final static String KAFKA_PORTS = "32789,32790";
     public final static String BOOTSTRAP_SERVER(){
         List<String> list = new ArrayList<String>();

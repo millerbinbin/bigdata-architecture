@@ -1,8 +1,9 @@
-package stormTest.bolts;
+package com.jd.yhd.bigdata.stormTest.bolts;
 
+import com.jd.yhd.bigdata.commons.BigDataConnection;
+import com.jd.yhd.bigdata.commons.MongoUtil;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import commons.MongoUtil;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.BasicOutputCollector;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -48,8 +49,9 @@ public class WordCounter extends BaseBasicBolt {
 		this.counters = new HashMap<String, Integer>();
 		this.name = context.getThisComponentId();
 		this.id = context.getThisTaskId();
-		this.collection = MongoUtil.getCollection(MongoUtil.getMongoConnection(), "oneTime");
-	}
+        MongoClient conn = new BigDataConnection().getMongoConnection();
+        this.collection = MongoUtil.getCollection(conn, "oneTime");
+    }
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {}
 

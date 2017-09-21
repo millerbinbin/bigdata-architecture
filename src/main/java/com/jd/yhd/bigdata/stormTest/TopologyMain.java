@@ -1,11 +1,11 @@
-package stormTest;
+package com.jd.yhd.bigdata.stormTest;
 
+import com.jd.yhd.bigdata.stormTest.bolts.WordCounter;
+import com.jd.yhd.bigdata.stormTest.bolts.WordNormalizer;
+import com.jd.yhd.bigdata.stormTest.spouts.WordReader;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.topology.TopologyBuilder;
-import stormTest.spouts.WordReader;
-import stormTest.bolts.WordCounter;
-import stormTest.bolts.WordNormalizer;
 
 
 public class TopologyMain {

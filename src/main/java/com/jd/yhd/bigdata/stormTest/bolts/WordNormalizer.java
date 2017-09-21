@@ -1,4 +1,4 @@
-package stormTest.bolts;
+package com.jd.yhd.bigdata.stormTest.bolts;
 
 
 import org.apache.storm.topology.BasicOutputCollector;

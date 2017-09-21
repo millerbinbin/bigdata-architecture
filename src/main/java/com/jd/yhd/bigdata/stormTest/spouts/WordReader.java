@@ -1,12 +1,5 @@
-package stormTest.spouts;
+package com.jd.yhd.bigdata.stormTest.spouts;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Map;
-import java.util.Random;
-
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.IRichSpout;
@@ -15,6 +8,9 @@ import org.apache.storm.topology.base.BaseRichSpout;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.Time;
+
+import java.util.Map;
+import java.util.Random;
 
 public class WordReader extends BaseRichSpout implements IRichSpout {
 
