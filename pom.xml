@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jd.yhd.bigdata</groupId>
-    <artifactId>architecture</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>bigdata-architecture</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <properties>
         <redis.client.version>2.9.0</redis.client.version>
         <mongodb.driver.version>3.5.0</mongodb.driver.version>

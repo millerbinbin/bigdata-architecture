@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+
 public class BigDataConnection {
     private final static String KAFKA_SERVERS = Constants.KAFKA_SERVER();
     private final static String ZOOKEEPER_SERVERS = Constants.ZOOKEEPER_SERVER();
@@ -73,12 +74,16 @@ public class BigDataConnection {
     public SpoutConfig getKafkaSpout(String topic) {
         BrokerHosts brokerHosts = new ZkHosts(ZOOKEEPER_SERVERS);
         String spoutId = "kafka-storm-test-001";
+
         SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, topic, "/consumers/" + spoutId, spoutId);
         spoutConfig.zkPort = Constants.ZOOKEEPER_PORTS;
         spoutConfig.zkServers = Arrays.asList(Constants.BIGDATA_HOST);
         spoutConfig.socketTimeoutMs = 60 * 1000;
         spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
+        spoutConfig.stateUpdateIntervalMs = 5 * 1000;
+        spoutConfig.maxOffsetBehind = 1000;
         return spoutConfig;
     }
+
 
 }

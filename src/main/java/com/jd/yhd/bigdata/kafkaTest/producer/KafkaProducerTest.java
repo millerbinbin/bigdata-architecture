@@ -29,7 +29,7 @@ public class KafkaProducerTest implements Runnable {
             System.out.println(data);
             messageNo++;
             try {
-                Time.sleep(1000);
+                Time.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

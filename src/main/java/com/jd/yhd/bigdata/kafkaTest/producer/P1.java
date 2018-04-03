@@ -8,7 +8,7 @@ public class P1 {
         Thread t3 = new Thread(new KafkaProducerTest("p-3", "TEST-TOPIC-3"));
         //Thread t4 = new Thread(new KafkaProducerTest("p-4", "TEST-TOPIC-4"));
         t1.start();
-        t2.start();
+        //t2.start();
         //t3.start();
         //t4.start();
     }

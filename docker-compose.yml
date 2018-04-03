@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -47,6 +47,15 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - bigdata-cluster
+
+  mongo:
+    image: mongo
+    command: bash -c "mongod; mongo test --eval \"db.createUser({user:'mongo_user',pwd:'mongo_user',roles:[{role:'readWrite',db:'test'}]})\""
+    container_name: bigdata_mongo
+    ports:
+      - "27017:27017"
     networks:
       - bigdata-cluster
 
