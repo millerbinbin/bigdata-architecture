@@ -113,13 +113,13 @@
 ### master election (znode lock)
 ### znode
 
-- NOSQL(MONGODB\CASSANDRA)
+# NOSQL(MONGODB\CASSANDRA)
 
-- *FLINK
+# *FLINK
 
-- *ES
+# *ES
 
-- *FLUME
+# *FLUME
 
 # RECOMMENDATION
 ### etl
