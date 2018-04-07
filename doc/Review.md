@@ -22,7 +22,8 @@
   - combine index (left prefix) using IN for absent column
 ### isolation
   - read committed  - sqlServer / Oracle
-  - read repeatable - mysql
+  - read repeatable - mysql
+### MVCC
 
 # HADOOP
 ### yarn
@@ -78,7 +79,10 @@
   - -1 wait for all
 
 # STORM
-
+### topology
+  - spout -> bolt -> bolt...
+### spout
+### bolt
 # REDIS
 ### data structure
   - string
