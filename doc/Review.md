@@ -21,8 +21,8 @@
   - covering index(如果where条件的列和返回的数据在一个索引中，那么不需要回查表，就叫覆盖索引)
   - combine index (left prefix) using IN for absent column
 ### isolation
-  - read committed  - sqlServer / Oracle
-  - read repeatable - mysql
+  - read committed  -> SqlServer / Oracle
+  - read repeatable -> MySQL
 ### MVCC
 
 # HADOOP
@@ -83,6 +83,7 @@
   - spout -> bolt -> bolt...
 ### spout
 ### bolt
+
 # REDIS
 ### data structure
   - string
