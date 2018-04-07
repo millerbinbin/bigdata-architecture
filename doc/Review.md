@@ -105,7 +105,7 @@
     - appendfsync no (fastest, write into buffer w/o disk)
 ### distributed mutex(using watch CAS)
 ### atomic operation
-  - 缓存穿透、缓存击穿与雪崩效应
+### 缓存穿透、缓存击穿与雪崩效应
 
 # ZOOKEEPER
 ### *[zab](https://www.cnblogs.com/jian-xiao/p/5821675.html)*
@@ -116,8 +116,6 @@
 - NOSQL(MONGODB\CASSANDRA)
 
 - *FLINK
-
-- *FLUME
 
 - *ES
 
