@@ -21,8 +21,9 @@
   - covering index(如果where条件的列和返回的数据在一个索引中，那么不需要回查表，就叫覆盖索引)
   - combine index (left prefix) using IN for absent column
 ### isolation
-  - read committed  - sqlServer / Oracle
-  - read repeatable - mysql
+  - read committed  -> SqlServer / Oracle
+  - read repeatable -> MySQL
+### MVCC
 
 # HADOOP
 ### yarn
@@ -38,7 +39,7 @@
     - partition
     - spill
     - sort
-    - comine
+    - combine
     - merge
   - reduce
     
@@ -110,7 +111,7 @@
     - appendfsync no (fastest, write into buffer w/o disk)
 ### distributed mutex(using watch CAS)
 ### atomic operation
-  - 缓存穿透、缓存击穿与雪崩效应
+### 缓存穿透、缓存击穿与雪崩效应
 
 # ZOOKEEPER
 ### *[zab](https://www.cnblogs.com/jian-xiao/p/5821675.html)*
@@ -127,10 +128,9 @@
 
 # *FLINK
 
-# *FLUME
-
 # *ES
 
+# *FLUME
 
 # RECOMMENDATION
 ### etl
