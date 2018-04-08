@@ -65,19 +65,28 @@
 # KAFKA
 ### topic
 ### partition
-  - leader ( r/w)
-  - replica (backup only)
+  - replica
+    - leader ( r/w)
+    - follower (backup only)
 ### logSegment
-### consumer / consumer group (partition_num == consumer_num)
+### consumer / consumer group
+  - best practice (partition_num == consumer_num)
 ### broker
-  - leader
-  - follower
+  - controller ( elect partition leader / manage topics / reassign replicas)
 ### ack
   - 0 no wait
   - 1  wait for leader
   - -1 wait for all
 
 # STORM
+### topology
+  - spout(input)->bolt(output / input)->bolt()...
+### spout
+  - nextTuple
+  - field
+### bolt
+  - shuffleGrouping
+  - fieldsGrouping
 
 # REDIS
 ### data structure
@@ -109,15 +118,19 @@
 ### master election (znode lock)
 ### znode
 
-- NOSQL(MONGODB\CASSANDRA)
+# NOSQL
+### MONGODB
+  - ObjectId
+    - Timestamp(4) + MachineId(3) + Pid(3) + IncNo(3)
+### CASSANDRA
+  -
 
-- *FLINK
+# *FLINK
 
-- *FLUME
+# *FLUME
 
-- *ES
+# *ES
 
-- *FLUME
 
 # RECOMMENDATION
 ### etl
