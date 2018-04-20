@@ -1,4 +1,4 @@
-package com.jd.yhd.bigdata.kafkaTest.consumer;
+package com.jd.yhd.bigdata.kafka.consumer;
 
 import com.jd.yhd.bigdata.commons.BigDataConnection;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -7,13 +7,16 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.util.Arrays;
 
-public class KafkaConsumerTest implements Runnable{
+/**
+ * @author hubin6
+ */
+public class KafkaConsumerStart implements Runnable {
     private final KafkaConsumer<String, String> consumer;
     private final String group_id;
     private final String c_name;
     private final String subscribe_topic;
 
-    public KafkaConsumerTest(String cname, String groupId, String topic) {
+    public KafkaConsumerStart(String cname, String groupId, String topic) {
         group_id = groupId;
         c_name = cname;
         subscribe_topic = topic;
@@ -25,8 +28,9 @@ public class KafkaConsumerTest implements Runnable{
     public void run() {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records)
+            for (ConsumerRecord<String, String> record : records) {
                 System.out.printf("name = %s, consumer_group = %s, offset = %d, key = %s, value = %s%n", c_name, group_id, record.offset(), record.key(), record.value());
+            }
             consumer.commitAsync();
         }
     }

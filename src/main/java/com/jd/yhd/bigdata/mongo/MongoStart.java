@@ -1,4 +1,4 @@
-package com.jd.yhd.bigdata.mongoTest;
+package com.jd.yhd.bigdata.mongo;
 
 import com.jd.yhd.bigdata.commons.BigDataConnection;
 import com.jd.yhd.bigdata.commons.MongoUtil;
@@ -9,8 +9,11 @@ import org.bson.Document;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MongoTest {
-    public static void main( String args[] ){
+/**
+ * @author hubin6
+ */
+public class MongoStart {
+    public static void main(String[] args) {
         try{
             MongoClient conn = new BigDataConnection().getMongoConnection();
             String tableName = "oneTime";

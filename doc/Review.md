@@ -6,10 +6,13 @@
   - equals / hashCode
   - Boxing / Unboxing
   - synchronize / volatile / AtomicInteger / thread pool / countDownLatch / cyclicBarrier
-### desgin pattern
+  - generic
+  - reflect
+### design pattern
   - singleton
 ### spring
-  - ?
+  - IOC
+  - DI
 ### nio
   - ?
 ### jvm
@@ -49,7 +52,9 @@
 ### external / internal table
 ### static partition / dynamic partition
 ### tunning (data skew)
-  - map left join (distributed cache)
+  - map left join (distributed cache) /*+ MAPJOIN(b) */
+  - prefilter
+  - reduce jobs
 
 # HBASE
 ### rowKey

@@ -19,9 +19,12 @@ import java.util.List;
 import java.util.Properties;
 
 
+/**
+ * @author hubin6
+ */
 public class BigDataConnection {
-    private final static String KAFKA_SERVERS = Constants.KAFKA_SERVER();
-    private final static String ZOOKEEPER_SERVERS = Constants.ZOOKEEPER_SERVER();
+    private final static String KAFKA_SERVERS = Constants.KAFKA_SERVER;
+    private final static String ZOOKEEPER_SERVERS = Constants.ZOOKEEPER_SERVER;
 
     public MongoClient getMongoConnection() {
         // only one node
@@ -59,10 +62,10 @@ public class BigDataConnection {
         return producer;
     }
 
-    public KafkaConsumer<String, String> getKafkaConsumer(String group_id) {
+    public KafkaConsumer<String, String> getKafkaConsumer(String groupId) {
         Properties props = new Properties();
         props.put("bootstrap.servers", KAFKA_SERVERS);
-        props.put("group.id", group_id);
+        props.put("group.id", groupId);
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");

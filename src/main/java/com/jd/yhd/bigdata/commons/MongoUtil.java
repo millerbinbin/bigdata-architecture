@@ -5,6 +5,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
+/**
+ * @author hubin6
+ */
 public class MongoUtil {
 
 
@@ -16,7 +19,6 @@ public class MongoUtil {
     public static void upsertRecord(MongoCollection<Document> collection, Document query, Document data){
         collection.replaceOne(query, data, new UpdateOptions().upsert(true));
     }
-
 
 
 }
